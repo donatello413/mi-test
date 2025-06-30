@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Activity;
+use App\Models\Business;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
- * @extends Factory<Activity>
+ * @extends Factory<Business>
  */
-class ActivityFactory extends Factory
+class BusinessFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +20,12 @@ class ActivityFactory extends Factory
      */
     public function definition(): array
     {
+        $name = fake()->company();
+        $slug = Str::slug($name);
+
         return [
-            //
+            'name' => $name,
+            'slug' => $slug,
         ];
     }
 }

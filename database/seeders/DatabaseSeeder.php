@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            OrganizationSeeder::class,
+            BusinessSeeder::class,
             BuildingSeeder::class,
-            ActivitySeeder::class,
+            OrganizationSeeder::class,
         ]);
     }
 }

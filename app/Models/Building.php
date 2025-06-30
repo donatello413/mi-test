@@ -12,4 +12,16 @@ class Building extends Model
 {
     /** @use HasFactory<BuildingFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'address',
+        'latitude',
+        'longitude'
+    ];
+
+    protected $casts = [
+        'latitude' => 'decimal:7',
+        'longitude' => 'decimal:7',
+    ];
+
 }

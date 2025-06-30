@@ -20,7 +20,9 @@ class BuildingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'address' => fake()->streetAddress(),
+            'latitude' => fake()->latitude(),
+            'longitude' => fake()->longitude()
         ];
     }
 }
