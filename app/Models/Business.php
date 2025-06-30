@@ -30,6 +30,14 @@ class Business extends Model
     }
 
     /**
+     * @return HasMany<Business>
+     */
+    public function childrenRecursive(): HasMany
+    {
+        return $this->children()->with(['childrenRecursive']);
+    }
+
+    /**
      * @return BelongsTo<Business>
      */
     public function parent(): BelongsTo
