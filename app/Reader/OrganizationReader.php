@@ -11,7 +11,9 @@ use App\Interfaces\OrganizationRepositoryInterface;
 use App\Transfers\OrganizationDto;
 use App\Transfers\OrganizationsByBuildingRequestDto;
 use App\Transfers\OrganizationsByBusinessRequestDto;
+use App\Transfers\OrganizationsByGeoAreaRequestDto;
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 
 class OrganizationReader implements OrganizationReaderInterface
 {
@@ -26,7 +28,7 @@ class OrganizationReader implements OrganizationReaderInterface
      * @param OrganizationsByBuildingRequestDto $requestDto
      * @return Collection<int, OrganizationDto>
      */
-    public function getOrganizationsByBuildingAction(OrganizationsByBuildingRequestDto $requestDto): Collection
+    public function getOrganizationsByBuilding(OrganizationsByBuildingRequestDto $requestDto): Collection
     {
         $building = $this->buildingRepository->getBuildingByAddress($requestDto->address);
 
@@ -37,10 +39,39 @@ class OrganizationReader implements OrganizationReaderInterface
      * @param OrganizationsByBusinessRequestDto $requestDto
      * @return Collection<int, OrganizationDto>
      */
-    public function getOrganizationsByBusinessAction(OrganizationsByBusinessRequestDto $requestDto): Collection
+    public function getOrganizationsByBusiness(OrganizationsByBusinessRequestDto $requestDto): Collection
     {
         $business = $this->businessRepository->getBusinessBySlug($requestDto->slug);
 
         return $this->organizationRepository->getOrganizationsByBusinessId($business->id);
+    }
+
+    /**
+     * @param OrganizationsByGeoAreaRequestDto $requestDto
+     * @return Collection<int, OrganizationDto>
+     */
+    public function getOrganizationsByGeoArea(OrganizationsByGeoAreaRequestDto $requestDto): Collection
+    {
+        if ($requestDto->radius !== null) {
+            $buildings = $this->buildingRepository->getBuildingIdsByRadius(
+                latitude: $requestDto->latitude1,
+                longitude: $requestDto->longitude1,
+                radius: $requestDto->radius
+            );
+        } elseif (count($requestDto->getPoints()) > 0) {
+            $buildings = $this->buildingRepository->getBuildingIdsByBoundingBox($requestDto->getPoints());
+            dd($buildings);
+        } else {
+            throw new InvalidArgumentException(message: 'Either radius or bounding box coordinates must be provided');
+        }
+
+        /** @var int[] $buildingIds */
+        $buildingIds = $buildings->pluck('id')->toArray();
+        dd($buildingIds);
+
+        $organizations = $this->organizationRepository->getOrganizationsByBuildingIds($buildingIds);
+        $organizations = Organization::with('building')
+            ->whereIn('building_id', $buildingIds)
+            ->get();
     }
 }

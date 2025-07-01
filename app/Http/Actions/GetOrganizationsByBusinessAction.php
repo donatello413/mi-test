@@ -18,7 +18,7 @@ final readonly class GetOrganizationsByBusinessAction
     public function __invoke(OrganizationsByBusinessRequest $request): OrganizationResource
     {
         /** @var Collection<int, OrganizationDto> $result */
-        $result = $this->organizationReader->getOrganizationsByBusinessAction(requestDto: $request->toDto($request));
+        $result = $this->organizationReader->getOrganizationsByBusiness(requestDto: $request->toDto($request));
 
         return new OrganizationResource($result);
     }

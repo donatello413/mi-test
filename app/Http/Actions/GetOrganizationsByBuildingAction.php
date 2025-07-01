@@ -20,7 +20,7 @@ final readonly class GetOrganizationsByBuildingAction
     public function __invoke(OrganizationsByBuildingRequest $request): OrganizationResource
     {
         /** @var Collection<int, OrganizationDto> $result */
-        $result = $this->organizationReader->getOrganizationsByBuildingAction(requestDto: $request->toDto($request));
+        $result = $this->organizationReader->getOrganizationsByBuilding(requestDto: $request->toDto($request));
 
         return new OrganizationResource($result);
     }

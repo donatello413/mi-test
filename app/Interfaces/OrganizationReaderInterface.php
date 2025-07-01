@@ -7,6 +7,7 @@ namespace App\Interfaces;
 use App\Transfers\OrganizationDto;
 use App\Transfers\OrganizationsByBuildingRequestDto;
 use App\Transfers\OrganizationsByBusinessRequestDto;
+use App\Transfers\OrganizationsByGeoAreaRequestDto;
 use Illuminate\Support\Collection;
 
 interface OrganizationReaderInterface
@@ -14,10 +15,15 @@ interface OrganizationReaderInterface
     /**
      * @return Collection<int, OrganizationDto>
      */
-    public function getOrganizationsByBuildingAction(OrganizationsByBuildingRequestDto $requestDto): Collection;
+    public function getOrganizationsByBuilding(OrganizationsByBuildingRequestDto $requestDto): Collection;
 
     /**
      * @return Collection<int, OrganizationDto>
      */
-    public function getOrganizationsByBusinessAction(OrganizationsByBusinessRequestDto $requestDto): Collection;
+    public function getOrganizationsByBusiness(OrganizationsByBusinessRequestDto $requestDto): Collection;
+
+    /**
+     * @return Collection<int, OrganizationDto>
+     */
+    public function getOrganizationsByGeoArea(OrganizationsByGeoAreaRequestDto $requestDto): Collection;
 }

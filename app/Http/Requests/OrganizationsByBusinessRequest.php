@@ -26,8 +26,6 @@ class OrganizationsByBusinessRequest extends FormRequest
         /** @var string[] $validated */
         $validated = $request->validated();
 
-        return new OrganizationsByBusinessRequestDto(
-            $validated['slug'],
-        );
+        return OrganizationsByBusinessRequestDto::fromArray($validated);
     }
 }

@@ -11,10 +11,11 @@ Route::prefix('v1')
     ->middleware('apikey')
     ->group(function () {
         Route::prefix('organizations')->group(callback: function () {
-            Route::get('/{building}', GetOrganizationsByBuildingAction::class);
+            Route::get('/building', GetOrganizationsByBuildingAction::class);
 
-            Route::get('/{business}', GetOrganizationsByBusinessAction::class);
+            Route::get('/business', GetOrganizationsByBusinessAction::class);
 
-            Route::get('/{geo-area}', GetOrganizationsByGeoAreaAction::class);
+            Route::get('/geo-area', GetOrganizationsByGeoAreaAction::class);
         });
     });
+

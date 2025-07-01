@@ -26,8 +26,6 @@ class OrganizationsByBuildingRequest extends FormRequest
         /** @var string[] $validated */
         $validated = $request->validated();
 
-        return new OrganizationsByBuildingRequestDto(
-            $validated['address'],
-        );
+        return OrganizationsByBuildingRequestDto::fromArray($validated);
     }
 }

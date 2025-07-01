@@ -14,7 +14,7 @@ final class BusinessDto extends Data
         public ?int $id,
         public string $name,
         public string $slug,
-        public int $parentId,
+        public ?int $parentId = null,
         public Collection $children = new Collection(),
     ) {
     }
@@ -27,7 +27,7 @@ final class BusinessDto extends Data
             id: $validatedData['id'] ?? null,
             name: $validatedData['name'],
             slug: $validatedData['slug'],
-            parentId: $validatedData['parent_id'],
+            parentId: $validatedData['parent_id'] ?? null,
             children: $validatedData['children'] ?? new Collection(),
         );
     }
@@ -39,7 +39,7 @@ final class BusinessDto extends Data
             name: $model->name,
             slug: $model->slug,
             parentId: $model->parent_id,
-            children: $model->children,
+            children: $model->children->map(fn (Business $child) => self::fromModel($child))
         );
     }
 }

@@ -26,6 +26,19 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         return $organizations->map(fn(Organization $organization) => OrganizationDto::fromModel($organization));
     }
 
+    /**
+     * @param array $buildingIds
+     * @return Collection<int, OrganizationDto>
+     */
+    public function getOrganizationsByBuildingIds(array $buildingIds): Collection
+    {
+        // TODO: Implement getOrganizationsByBuildingIds() method.
+    }
+
+    /**
+     * @param int $businessId
+     * @return Collection<int, OrganizationDto>
+     */
     public function getOrganizationsByBusinessId(int $businessId): Collection
     {
         $organizations = Organization::query()
