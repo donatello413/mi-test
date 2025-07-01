@@ -28,4 +28,10 @@ interface OrganizationRepositoryInterface
      * @return Collection<int, OrganizationDto>
      */
     public function getOrganizationsByBusinessId(int $businessId): Collection;
+
+    /**
+     * @param int $id
+     * @return OrganizationDto
+     */
+    public function getOrganizationsById(int $id): OrganizationDto;
 }

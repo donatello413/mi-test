@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Actions;
 
 use App\Http\Requests\OrganizationByGeoAreaRequest;
-use App\Http\Resources\OrganizationResource;
+use App\Http\Resources\OrganizationsResource;
 use App\Interfaces\OrganizationReaderInterface;
 use App\Transfers\OrganizationDto;
 use App\Transfers\OrganizationWithBuildingDataDto;
@@ -18,11 +18,14 @@ final readonly class GetOrganizationsByGeoAreaAction
     ) {
     }
 
-    public function __invoke(OrganizationByGeoAreaRequest $request): OrganizationResource
+    public function __invoke(OrganizationByGeoAreaRequest $request): OrganizationsResource
     {
         /** @var Collection<int, OrganizationDto>|Collection<int, OrganizationWithBuildingDataDto> $result */
-        $result = $this->organizationReader->getOrganizationsByGeoArea(requestDto: $request->toDto($request), withBuilding: true);
+        $result = $this->organizationReader->getOrganizationsByGeoArea(
+            requestDto: $request->toDto($request),
+            withBuilding: true
+        );
 
-        return new OrganizationResource($result);
+        return new OrganizationsResource($result);
     }
 }

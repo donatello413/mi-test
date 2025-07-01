@@ -30,4 +30,10 @@ interface OrganizationReaderInterface
      * @return Collection<int, OrganizationDto>
      */
     public function getOrganizationsByGeoArea(OrganizationsByGeoAreaRequestDto $requestDto, bool $withBuilding = false): Collection;
+
+    /**
+     * @param int $id
+     * @return OrganizationDto
+     */
+    public function getOrganizationsById(int $id): OrganizationDto;
 }

@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Transfers\BuildingDto;
 use App\Transfers\OrganizationDto;
 use App\Transfers\OrganizationWithBuildingDataDto;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 
 class OrganizationRepository implements OrganizationRepositoryInterface
@@ -72,6 +73,21 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             ->get();
 
         return $organizations->map(fn(Organization $organization) => OrganizationDto::fromModel($organization));
+    }
+
+    /**
+     * @param int $id
+     * @return OrganizationDto
+     */
+    public function getOrganizationsById(int $id): OrganizationDto
+    {
+        $organizations = Organization::query()->find($id);
+        
+        if ($organizations === null) {
+            throw new ModelNotFoundException("Organization with id '{$id}' not found");
+        }
+
+        return OrganizationDto::fromModel($organizations);
     }
 
     /**

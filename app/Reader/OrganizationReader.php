@@ -76,4 +76,13 @@ class OrganizationReader implements OrganizationReaderInterface
             withBuilding: $withBuilding
         );
     }
+
+    /**
+     * @param int $id
+     * @return OrganizationDto
+     */
+    public function getOrganizationsById(int $id): OrganizationDto
+    {
+        return $this->organizationRepository->getOrganizationsById($id);
+    }
 }
