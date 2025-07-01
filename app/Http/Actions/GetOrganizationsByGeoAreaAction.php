@@ -8,6 +8,7 @@ use App\Http\Requests\OrganizationByGeoAreaRequest;
 use App\Http\Resources\OrganizationResource;
 use App\Interfaces\OrganizationReaderInterface;
 use App\Transfers\OrganizationDto;
+use App\Transfers\OrganizationWithBuildingDataDto;
 use Illuminate\Support\Collection;
 
 final readonly class GetOrganizationsByGeoAreaAction
@@ -19,8 +20,8 @@ final readonly class GetOrganizationsByGeoAreaAction
 
     public function __invoke(OrganizationByGeoAreaRequest $request): OrganizationResource
     {
-        /** @var Collection<int, OrganizationDto> $result */
-        $result = $this->organizationReader->getOrganizationsByGeoArea(requestDto: $request->toDto($request));
+        /** @var Collection<int, OrganizationDto>|Collection<int, OrganizationWithBuildingDataDto> $result */
+        $result = $this->organizationReader->getOrganizationsByGeoArea(requestDto: $request->toDto($request), withBuilding: true);
 
         return new OrganizationResource($result);
     }

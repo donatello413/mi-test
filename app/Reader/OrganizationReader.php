@@ -12,6 +12,7 @@ use App\Transfers\OrganizationDto;
 use App\Transfers\OrganizationsByBuildingRequestDto;
 use App\Transfers\OrganizationsByBusinessRequestDto;
 use App\Transfers\OrganizationsByGeoAreaRequestDto;
+use App\Transfers\OrganizationWithBuildingDataDto;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 
@@ -48,10 +49,13 @@ class OrganizationReader implements OrganizationReaderInterface
 
     /**
      * @param OrganizationsByGeoAreaRequestDto $requestDto
-     * @return Collection<int, OrganizationDto>
+     * @param bool $withBuilding
+     * @return Collection<int, OrganizationDto>|Collection<int, OrganizationWithBuildingDataDto>
      */
-    public function getOrganizationsByGeoArea(OrganizationsByGeoAreaRequestDto $requestDto): Collection
-    {
+    public function getOrganizationsByGeoArea(
+        OrganizationsByGeoAreaRequestDto $requestDto,
+        bool $withBuilding = false
+    ): Collection {
         if ($requestDto->radius !== null) {
             $buildings = $this->buildingRepository->getBuildingIdsByRadius(
                 latitude: $requestDto->latitude1,
@@ -60,18 +64,16 @@ class OrganizationReader implements OrganizationReaderInterface
             );
         } elseif (count($requestDto->getPoints()) > 0) {
             $buildings = $this->buildingRepository->getBuildingIdsByBoundingBox($requestDto->getPoints());
-            dd($buildings);
         } else {
             throw new InvalidArgumentException(message: 'Either radius or bounding box coordinates must be provided');
         }
 
         /** @var int[] $buildingIds */
         $buildingIds = $buildings->pluck('id')->toArray();
-        dd($buildingIds);
 
-        $organizations = $this->organizationRepository->getOrganizationsByBuildingIds($buildingIds);
-        $organizations = Organization::with('building')
-            ->whereIn('building_id', $buildingIds)
-            ->get();
+        return $this->organizationRepository->getOrganizationsByBuildingIds(
+            buildingIds: $buildingIds,
+            withBuilding: $withBuilding
+        );
     }
 }

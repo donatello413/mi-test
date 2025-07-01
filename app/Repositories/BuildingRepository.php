@@ -66,27 +66,16 @@ class BuildingRepository implements BuildingRepositoryInterface
 
         $buildings = Building::query()
             ->whereRaw(
-                "ST_Contains(ST_GeomFromText(?), ST_SetSRID(ST_MakePoint(longitude, latitude), 4326))",
-                [$polygon]
+                sql: $this->getGeometry(),
+                bindings: [$polygon]
             )
             ->get();
 
-        dd($buildings);
         if ($buildings->isEmpty()) {
             throw new ModelNotFoundException("Buildings in bounding box not found");
         }
 
         return $buildings->map(fn(Building $building) => BuildingDto::fromModel($building));
-    }
-
-    /**
-     * @return string
-     */
-    private function getHaversine(): string
-    {
-        return "(6371000 * acos(cos(radians(?)) * cos(radians(latitude)) 
-                        * cos(radians(longitude) - radians(?)) 
-                        + sin(radians(?)) * sin(radians(latitude))))";
     }
 
     /**
@@ -131,5 +120,23 @@ class BuildingRepository implements BuildingRepositoryInterface
         );
 
         return $points;
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    private function getHaversine(): string
+    {
+        return "(6371000 * acos(cos(radians(?)) * cos(radians(latitude)) 
+                        * cos(radians(longitude) - radians(?)) 
+                        + sin(radians(?)) * sin(radians(latitude))))";
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    public function getGeometry(): string
+    {
+        return "ST_Contains(ST_SetSRID(ST_GeomFromText(?), 4326), ST_SetSRID(ST_MakePoint(longitude, latitude), 4326))";
     }
 }

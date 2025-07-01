@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Interfaces;
 
 use App\Transfers\OrganizationDto;
+use App\Transfers\OrganizationWithBuildingDataDto;
 use Illuminate\Support\Collection;
 
 interface OrganizationRepositoryInterface
@@ -17,9 +18,10 @@ interface OrganizationRepositoryInterface
 
     /**
      * @param array $buildingIds
-     * @return Collection<int, OrganizationDto>
+     * @param bool $withBuilding
+     * @return Collection<int, OrganizationDto>|Collection<int, OrganizationWithBuildingDataDto>
      */
-    public function getOrganizationsByBuildingIds(array $buildingIds): Collection;
+    public function getOrganizationsByBuildingIds(array $buildingIds, bool $withBuilding = false): Collection;
 
     /**
      * @param int $businessId
