@@ -40,4 +40,11 @@ interface OrganizationRepositoryInterface
      * @return OrganizationDto
      */
     public function getOrganizationsById(int $id): OrganizationDto;
+
+    /**
+     * @param string $name
+     * @return OrganizationDto
+     */
+    public function getOrganizationsByName(string $name): OrganizationDto;
+
 }

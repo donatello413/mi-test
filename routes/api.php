@@ -7,6 +7,7 @@ use App\Http\Actions\GetOrganizationsByBusinessAction;
 use App\Http\Actions\GetOrganizationsByBusinessTreeAction;
 use App\Http\Actions\GetOrganizationsByGeoAreaAction;
 use App\Http\Actions\GetOrganizationsByIdAction;
+use App\Http\Actions\GetOrganizationsByNameAction;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')
@@ -22,6 +23,7 @@ Route::prefix('v1')
     ->group(function () {
         Route::prefix('organization/')->group(callback: function () {
             Route::get('{id}', GetOrganizationsByIdAction::class);
+            Route::get('name/{name}', GetOrganizationsByNameAction::class);
         });
     })
 ;

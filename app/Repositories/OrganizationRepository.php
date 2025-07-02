@@ -114,6 +114,26 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
+     * @param string $name
+     * @return OrganizationDto
+     */
+    public function getOrganizationsByName(string $name): OrganizationDto
+    {
+        $organizations = Organization::query()
+            ->where(function ($query) use ($name) {
+                $query->where('name', 'like', "%{$name}%")
+                    ->orWhere('slug', 'like', "%{$name}%");
+            })
+            ->first();
+
+        if ($organizations === null) {
+            throw new ModelNotFoundException("Organization with id '{$name}' not found");
+        }
+
+        return OrganizationDto::fromModel($organizations);
+    }
+
+    /**
      * @param Organization $organization
      * @param bool $withBuildingDto
      * @return OrganizationWithBuildingDataDto|OrganizationDto

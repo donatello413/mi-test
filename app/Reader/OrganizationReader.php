@@ -88,6 +88,15 @@ class OrganizationReader implements OrganizationReaderInterface
     }
 
     /**
+     * @param string $name
+     * @return OrganizationDto
+     */
+    public function getOrganizationsByName(string $name): OrganizationDto
+    {
+        return $this->organizationRepository->getOrganizationsByName($name);
+    }
+
+    /**
      * @param OrganizationsByBusinessRequestDto $requestDto
      * @return Collection<int, OrganizationDto>
      */

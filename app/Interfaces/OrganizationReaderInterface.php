@@ -41,6 +41,12 @@ interface OrganizationReaderInterface
     public function getOrganizationsById(int $id): OrganizationDto;
 
     /**
+     * @param string $name
+     * @return OrganizationDto
+     */
+    public function getOrganizationsByName(string $name): OrganizationDto;
+
+    /**
      * @param OrganizationsByBusinessRequestDto $requestDto
      * @return Collection<int, OrganizationDto>
      */
