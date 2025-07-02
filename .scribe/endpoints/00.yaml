@@ -1,17 +1,17 @@
-name: Endpoints
+name: Organizations
 description: ''
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/user
+    uri: api/v1/organizations/building
     metadata:
-      groupName: Endpoints
+      groupName: Organizations
       groupDescription: ''
       subgroup: ''
       subgroupDescription: ''
-      title: ''
-      description: ''
+      title: 'Получение организаций по зданию'
+      description: 'Получение списка организаций, находящихся в указанном здании'
       authenticated: false
       custom: []
     headers:
@@ -19,15 +19,396 @@ endpoints:
       Accept: application/json
     urlParameters: []
     cleanUrlParameters: []
-    queryParameters: []
-    cleanQueryParameters: []
-    bodyParameters: []
-    cleanBodyParameters: []
+    queryParameters:
+      address:
+        name: address
+        description: 'Адрес здания'
+        required: true
+        example: '71873 Carrie Plains'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      address: '71873 Carrie Plains'
+    bodyParameters:
+      address:
+        name: address
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      address: architecto
     fileParameters: []
     responses:
       -
         status: 401
-        content: '{"message":"Unauthenticated."}'
+        content: '{"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/organizations/business
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Получение организаций по бизнесу'
+      description: 'Получение списка организаций, относящихся к указанному бизнесу'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      slug:
+        name: slug
+        description: 'Slug бизнеса'
+        required: true
+        example: some-business-slug
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      slug: some-business-slug
+    bodyParameters:
+      slug:
+        name: slug
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      slug: architecto
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/organizations/geo-area
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Получение организаций по географической области'
+      description: 'Получение списка организаций в заданной географической области (радиус или прямоугольник)'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      radius:
+        name: radius
+        description: 'Радиус поиска в метрах'
+        required: false
+        example: '1000'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      latitude1:
+        name: latitude1
+        description: 'Широта первой точки'
+        required: true
+        example: '55.7558'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      longitude1:
+        name: longitude1
+        description: 'Долгота первой точки'
+        required: true
+        example: '37.6173'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      latitude2:
+        name: latitude2
+        description: 'Широта второй точки'
+        required: false
+        example: '55.7512'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      longitude2:
+        name: longitude2
+        description: 'Долгота второй точки'
+        required: false
+        example: '37.6225'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      latitude3:
+        name: latitude3
+        description: 'Широта третьей точки'
+        required: false
+        example: '55.7532'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      longitude3:
+        name: longitude3
+        description: 'Долгота третьей точки'
+        required: false
+        example: '37.6189'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      latitude4:
+        name: latitude4
+        description: 'Широта четвертой точки'
+        required: false
+        example: '55.7544'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      longitude4:
+        name: longitude4
+        description: 'Долгота четвертой точки'
+        required: false
+        example: '37.6200'
+        type: numeric
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      radius: '1000'
+      latitude1: '55.7558'
+      longitude1: '37.6173'
+      latitude2: '55.7512'
+      longitude2: '37.6225'
+      latitude3: '55.7532'
+      longitude3: '37.6189'
+      latitude4: '55.7544'
+      longitude4: '37.6200'
+    bodyParameters:
+      radius:
+        name: radius
+        description: 'Must be at least 0.'
+        required: false
+        example: 27
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      latitude1:
+        name: latitude1
+        description: 'Must be between -90 and 90.'
+        required: true
+        example: -89
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      longitude1:
+        name: longitude1
+        description: 'Must be between -180 and 180.'
+        required: true
+        example: -180
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      latitude2:
+        name: latitude2
+        description: 'Must be between -90 and 90.'
+        required: false
+        example: -89
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      longitude2:
+        name: longitude2
+        description: 'Must be between -180 and 180.'
+        required: false
+        example: -180
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      latitude3:
+        name: latitude3
+        description: 'Must be between -90 and 90.'
+        required: false
+        example: -90
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      longitude3:
+        name: longitude3
+        description: 'Must be between -180 and 180.'
+        required: false
+        example: -180
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      latitude4:
+        name: latitude4
+        description: 'Must be between -90 and 90.'
+        required: false
+        example: -89
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      longitude4:
+        name: longitude4
+        description: 'Must be between -180 and 180.'
+        required: false
+        example: -179
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      radius: 27
+      latitude1: -89
+      longitude1: -180
+      latitude2: -89
+      longitude2: -180
+      latitude3: -90
+      longitude3: -180
+      latitude4: -89
+      longitude4: -179
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthorized"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/organizations/business-tree
+    metadata:
+      groupName: Organizations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Получение организаций по бизнесу'
+      description: 'Получение списка организаций c учетом иерархии бизнеса'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      slug:
+        name: slug
+        description: 'Slug бизнеса'
+        required: true
+        example: business-slug
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanQueryParameters:
+      slug: business-slug
+    bodyParameters:
+      slug:
+        name: slug
+        description: ''
+        required: false
+        example: architecto
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      slug: architecto
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthorized"}'
         headers:
           cache-control: 'no-cache, private'
           content-type: application/json

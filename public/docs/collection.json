@@ -10,23 +10,31 @@
     ],
     "info": {
         "name": "Laravel API Documentation",
-        "_postman_id": "57495fef-adfb-4b86-bfd2-156e477b50d5",
+        "_postman_id": "c1a86d51-8145-4a06-a617-a1a02a226439",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
     "item": [
         {
-            "name": "Endpoints",
+            "name": "Organization",
             "description": "",
             "item": [
                 {
-                    "name": "GET api\/user",
+                    "name": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438 \u043f\u043e \u0438\u0434\u0435\u043d\u0442\u0438\u0444\u0438\u043a\u0430\u0442\u043e\u0440\u0443",
                     "request": {
                         "url": {
                             "host": "{{baseUrl}}",
-                            "path": "api\/user",
+                            "path": "api\/v1\/organization\/:id",
                             "query": [],
-                            "raw": "{{baseUrl}}\/api\/user"
+                            "raw": "{{baseUrl}}\/api\/v1\/organization\/:id",
+                            "variable": [
+                                {
+                                    "id": "id",
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "\u0418\u0434\u0435\u043d\u0442\u0438\u0444\u0438\u043a\u0430\u0442\u043e\u0440 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438"
+                                }
+                            ]
                         },
                         "method": "GET",
                         "header": [
@@ -40,7 +48,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "",
+                        "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438 \u043f\u043e \u0435\u0451 \u0438\u0434\u0435\u043d\u0442\u0438\u0444\u0438\u043a\u0430\u0442\u043e\u0440\u0443",
                         "auth": {
                             "type": "noauth"
                         }
@@ -62,7 +70,349 @@
                                 }
                             ],
                             "code": 401,
-                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "body": "{\"message\":\"Unauthorized\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438 \u043f\u043e \u043d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u0438\u044e",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/organization\/name\/:name",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/organization\/name\/:name",
+                            "variable": [
+                                {
+                                    "id": "name",
+                                    "key": "name",
+                                    "value": "ratke",
+                                    "description": "\u041d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0438 \u043f\u043e \u0435\u0451 \u043d\u0430\u0438\u043c\u0435\u043d\u043e\u0432\u0430\u043d\u0438\u044e",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthorized\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Organizations",
+            "description": "",
+            "item": [
+                {
+                    "name": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439 \u043f\u043e \u0437\u0434\u0430\u043d\u0438\u044e",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/organizations\/building",
+                            "query": [
+                                {
+                                    "key": "address",
+                                    "value": "71873+Carrie+Plains",
+                                    "description": "\u0410\u0434\u0440\u0435\u0441 \u0437\u0434\u0430\u043d\u0438\u044f",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/organizations\/building?address=71873+Carrie+Plains"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"address\":\"architecto\"}"
+                        },
+                        "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0441\u043f\u0438\u0441\u043a\u0430 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439, \u043d\u0430\u0445\u043e\u0434\u044f\u0449\u0438\u0445\u0441\u044f \u0432 \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u043c \u0437\u0434\u0430\u043d\u0438\u0438",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthorized\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439 \u043f\u043e \u0431\u0438\u0437\u043d\u0435\u0441\u0443",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/organizations\/business",
+                            "query": [
+                                {
+                                    "key": "slug",
+                                    "value": "some-business-slug",
+                                    "description": "Slug \u0431\u0438\u0437\u043d\u0435\u0441\u0430",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/organizations\/business?slug=some-business-slug"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"slug\":\"architecto\"}"
+                        },
+                        "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0441\u043f\u0438\u0441\u043a\u0430 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439, \u043e\u0442\u043d\u043e\u0441\u044f\u0449\u0438\u0445\u0441\u044f \u043a \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u043e\u043c\u0443 \u0431\u0438\u0437\u043d\u0435\u0441\u0443",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthorized\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439 \u043f\u043e \u0433\u0435\u043e\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u0441\u0442\u0438",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/organizations\/geo-area",
+                            "query": [
+                                {
+                                    "key": "radius",
+                                    "value": "1000",
+                                    "description": "\u0420\u0430\u0434\u0438\u0443\u0441 \u043f\u043e\u0438\u0441\u043a\u0430 \u0432 \u043c\u0435\u0442\u0440\u0430\u0445",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "latitude1",
+                                    "value": "55.7558",
+                                    "description": "\u0428\u0438\u0440\u043e\u0442\u0430 \u043f\u0435\u0440\u0432\u043e\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "longitude1",
+                                    "value": "37.6173",
+                                    "description": "\u0414\u043e\u043b\u0433\u043e\u0442\u0430 \u043f\u0435\u0440\u0432\u043e\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "latitude2",
+                                    "value": "55.7512",
+                                    "description": "\u0428\u0438\u0440\u043e\u0442\u0430 \u0432\u0442\u043e\u0440\u043e\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "longitude2",
+                                    "value": "37.6225",
+                                    "description": "\u0414\u043e\u043b\u0433\u043e\u0442\u0430 \u0432\u0442\u043e\u0440\u043e\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "latitude3",
+                                    "value": "55.7532",
+                                    "description": "\u0428\u0438\u0440\u043e\u0442\u0430 \u0442\u0440\u0435\u0442\u044c\u0435\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "longitude3",
+                                    "value": "37.6189",
+                                    "description": "\u0414\u043e\u043b\u0433\u043e\u0442\u0430 \u0442\u0440\u0435\u0442\u044c\u0435\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "latitude4",
+                                    "value": "55.7544",
+                                    "description": "\u0428\u0438\u0440\u043e\u0442\u0430 \u0447\u0435\u0442\u0432\u0435\u0440\u0442\u043e\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "longitude4",
+                                    "value": "37.6200",
+                                    "description": "\u0414\u043e\u043b\u0433\u043e\u0442\u0430 \u0447\u0435\u0442\u0432\u0435\u0440\u0442\u043e\u0439 \u0442\u043e\u0447\u043a\u0438",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/organizations\/geo-area?radius=1000&latitude1=55.7558&longitude1=37.6173&latitude2=55.7512&longitude2=37.6225&latitude3=55.7532&longitude3=37.6189&latitude4=55.7544&longitude4=37.6200"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"radius\":27,\"latitude1\":-89,\"longitude1\":-180,\"latitude2\":-89,\"longitude2\":-180,\"latitude3\":-90,\"longitude3\":-180,\"latitude4\":-89,\"longitude4\":-179}"
+                        },
+                        "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0441\u043f\u0438\u0441\u043a\u0430 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439 \u0432 \u0437\u0430\u0434\u0430\u043d\u043d\u043e\u0439 \u0433\u0435\u043e\u0433\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043a\u043e\u0439 \u043e\u0431\u043b\u0430\u0441\u0442\u0438 (\u0440\u0430\u0434\u0438\u0443\u0441 \u0438\u043b\u0438 \u043f\u0440\u044f\u043c\u043e\u0443\u0433\u043e\u043b\u044c\u043d\u0438\u043a)",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthorized\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439 \u043f\u043e \u0431\u0438\u0437\u043d\u0435\u0441\u0443",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/organizations\/business-tree",
+                            "query": [
+                                {
+                                    "key": "slug",
+                                    "value": "business-slug",
+                                    "description": "Slug \u0431\u0438\u0437\u043d\u0435\u0441\u0430",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/v1\/organizations\/business-tree?slug=business-slug"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"slug\":\"architecto\"}"
+                        },
+                        "description": "\u041f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u0435 \u0441\u043f\u0438\u0441\u043a\u0430 \u043e\u0440\u0433\u0430\u043d\u0438\u0437\u0430\u0446\u0438\u0439 c \u0443\u0447\u0435\u0442\u043e\u043c \u0438\u0435\u0440\u0430\u0440\u0445\u0438\u0438 \u0431\u0438\u0437\u043d\u0435\u0441\u0430",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthorized\"}",
                             "name": ""
                         }
                     ]

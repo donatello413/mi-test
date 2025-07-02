@@ -6,9 +6,16 @@ namespace App\Http\Actions;
 
 use App\Http\Resources\OrganizationResource;
 use App\Interfaces\OrganizationReaderInterface;
-use App\Transfers\OrganizationDto;
-use Illuminate\Support\Collection;
+use Knuckles\Scribe\Attributes\Endpoint;
+use Knuckles\Scribe\Attributes\Group;
+use Knuckles\Scribe\Attributes\UrlParam;
 
+#[Group("Organization")]
+#[Endpoint(
+    title: "Получение организации по наименованию",
+    description: "Получение организации по её наименованию",
+    authenticated: false,
+)]
 final readonly class GetOrganizationsByNameAction
 {
     public function __construct(
@@ -16,9 +23,9 @@ final readonly class GetOrganizationsByNameAction
     ) {
     }
 
+    #[UrlParam(name: 'name', description: 'Наименование организации', example: 'ratke')]
     public function __invoke(string $name): OrganizationResource
     {
-        /** @var Collection<int, OrganizationDto> $result */
         $result = $this->organizationReader->getOrganizationsByName($name);
 
         return new OrganizationResource($result);

@@ -8,14 +8,17 @@ servers:
     url: 'http://localhost'
 tags:
   -
-    name: Endpoints
+    name: Organization
+    description: ''
+  -
+    name: Organizations
     description: ''
 paths:
-  /api/user:
+  '/api/v1/organization/{id}':
     get:
-      summary: ''
-      operationId: getApiUser
-      description: ''
+      summary: 'Получение организации по идентификатору'
+      operationId: ''
+      description: 'Получение организации по её идентификатору'
       parameters: []
       responses:
         401:
@@ -25,11 +28,362 @@ paths:
               schema:
                 type: object
                 example:
-                  message: Unauthenticated.
+                  message: Unauthorized
                 properties:
                   message:
                     type: string
-                    example: Unauthenticated.
+                    example: Unauthorized
       tags:
-        - Endpoints
+        - Organization
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'Идентификатор организации'
+        example: 1
+        required: true
+        schema:
+          type: string
+  '/api/v1/organization/name/{name}':
+    get:
+      summary: 'Получение организации по наименованию'
+      operationId: ''
+      description: 'Получение организации по её наименованию'
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Organization
+      security: []
+    parameters:
+      -
+        in: path
+        name: name
+        description: 'Наименование организации'
+        example: ratke
+        required: true
+        schema:
+          type: string
+  /api/v1/organizations/building:
+    get:
+      summary: 'Получение организаций по зданию'
+      operationId: ''
+      description: 'Получение списка организаций, находящихся в указанном здании'
+      parameters:
+        -
+          in: query
+          name: address
+          description: 'Адрес здания'
+          example: '71873 Carrie Plains'
+          required: true
+          schema:
+            type: string
+            description: 'Адрес здания'
+            example: '71873 Carrie Plains'
+            nullable: false
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Organizations
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                address:
+                  type: string
+                  description: ''
+                  example: architecto
+                  nullable: false
+      security: []
+  /api/v1/organizations/business:
+    get:
+      summary: 'Получение организаций по бизнесу'
+      operationId: ''
+      description: 'Получение списка организаций, относящихся к указанному бизнесу'
+      parameters:
+        -
+          in: query
+          name: slug
+          description: 'Slug бизнеса'
+          example: some-business-slug
+          required: true
+          schema:
+            type: string
+            description: 'Slug бизнеса'
+            example: some-business-slug
+            nullable: false
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Organizations
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                  description: ''
+                  example: architecto
+                  nullable: false
+      security: []
+  /api/v1/organizations/geo-area:
+    get:
+      summary: 'Получение организаций по географической области'
+      operationId: ''
+      description: 'Получение списка организаций в заданной географической области (радиус или прямоугольник)'
+      parameters:
+        -
+          in: query
+          name: radius
+          description: 'Радиус поиска в метрах'
+          example: '1000'
+          required: false
+          schema:
+            type: numeric
+            description: 'Радиус поиска в метрах'
+            example: '1000'
+            nullable: false
+        -
+          in: query
+          name: latitude1
+          description: 'Широта первой точки'
+          example: '55.7558'
+          required: true
+          schema:
+            type: numeric
+            description: 'Широта первой точки'
+            example: '55.7558'
+            nullable: false
+        -
+          in: query
+          name: longitude1
+          description: 'Долгота первой точки'
+          example: '37.6173'
+          required: true
+          schema:
+            type: numeric
+            description: 'Долгота первой точки'
+            example: '37.6173'
+            nullable: false
+        -
+          in: query
+          name: latitude2
+          description: 'Широта второй точки'
+          example: '55.7512'
+          required: false
+          schema:
+            type: numeric
+            description: 'Широта второй точки'
+            example: '55.7512'
+            nullable: false
+        -
+          in: query
+          name: longitude2
+          description: 'Долгота второй точки'
+          example: '37.6225'
+          required: false
+          schema:
+            type: numeric
+            description: 'Долгота второй точки'
+            example: '37.6225'
+            nullable: false
+        -
+          in: query
+          name: latitude3
+          description: 'Широта третьей точки'
+          example: '55.7532'
+          required: false
+          schema:
+            type: numeric
+            description: 'Широта третьей точки'
+            example: '55.7532'
+            nullable: false
+        -
+          in: query
+          name: longitude3
+          description: 'Долгота третьей точки'
+          example: '37.6189'
+          required: false
+          schema:
+            type: numeric
+            description: 'Долгота третьей точки'
+            example: '37.6189'
+            nullable: false
+        -
+          in: query
+          name: latitude4
+          description: 'Широта четвертой точки'
+          example: '55.7544'
+          required: false
+          schema:
+            type: numeric
+            description: 'Широта четвертой точки'
+            example: '55.7544'
+            nullable: false
+        -
+          in: query
+          name: longitude4
+          description: 'Долгота четвертой точки'
+          example: '37.6200'
+          required: false
+          schema:
+            type: numeric
+            description: 'Долгота четвертой точки'
+            example: '37.6200'
+            nullable: false
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Organizations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                radius:
+                  type: number
+                  description: 'Must be at least 0.'
+                  example: 27
+                  nullable: true
+                latitude1:
+                  type: number
+                  description: 'Must be between -90 and 90.'
+                  example: -89
+                  nullable: false
+                longitude1:
+                  type: number
+                  description: 'Must be between -180 and 180.'
+                  example: -180
+                  nullable: false
+                latitude2:
+                  type: number
+                  description: 'Must be between -90 and 90.'
+                  example: -89
+                  nullable: true
+                longitude2:
+                  type: number
+                  description: 'Must be between -180 and 180.'
+                  example: -180
+                  nullable: true
+                latitude3:
+                  type: number
+                  description: 'Must be between -90 and 90.'
+                  example: -90
+                  nullable: true
+                longitude3:
+                  type: number
+                  description: 'Must be between -180 and 180.'
+                  example: -180
+                  nullable: true
+                latitude4:
+                  type: number
+                  description: 'Must be between -90 and 90.'
+                  example: -89
+                  nullable: true
+                longitude4:
+                  type: number
+                  description: 'Must be between -180 and 180.'
+                  example: -179
+                  nullable: true
+              required:
+                - latitude1
+                - longitude1
+      security: []
+  /api/v1/organizations/business-tree:
+    get:
+      summary: 'Получение организаций по бизнесу'
+      operationId: ''
+      description: 'Получение списка организаций c учетом иерархии бизнеса'
+      parameters:
+        -
+          in: query
+          name: slug
+          description: 'Slug бизнеса'
+          example: business-slug
+          required: true
+          schema:
+            type: string
+            description: 'Slug бизнеса'
+            example: business-slug
+            nullable: false
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthorized
+                properties:
+                  message:
+                    type: string
+                    example: Unauthorized
+      tags:
+        - Organizations
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slug:
+                  type: string
+                  description: ''
+                  example: architecto
+                  nullable: false
       security: []
