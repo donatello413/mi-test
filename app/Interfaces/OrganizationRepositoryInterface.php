@@ -24,6 +24,12 @@ interface OrganizationRepositoryInterface
     public function getOrganizationsByBuildingIds(array $buildingIds, bool $withBuilding = false): Collection;
 
     /**
+     * @param array $businessIds
+     * @return Collection<int, OrganizationDto>
+     */
+    public function getOrganizationsByBusinessIds(array $businessIds): Collection;
+
+    /**
      * @param int $businessId
      * @return Collection<int, OrganizationDto>
      */

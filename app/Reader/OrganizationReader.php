@@ -8,6 +8,7 @@ use App\Interfaces\BuildingRepositoryInterface;
 use App\Interfaces\BusinessRepositoryInterface;
 use App\Interfaces\OrganizationReaderInterface;
 use App\Interfaces\OrganizationRepositoryInterface;
+use App\Transfers\BusinessDto;
 use App\Transfers\OrganizationDto;
 use App\Transfers\OrganizationsByBuildingRequestDto;
 use App\Transfers\OrganizationsByBusinessRequestDto;
@@ -84,5 +85,38 @@ class OrganizationReader implements OrganizationReaderInterface
     public function getOrganizationsById(int $id): OrganizationDto
     {
         return $this->organizationRepository->getOrganizationsById($id);
+    }
+
+    /**
+     * @param OrganizationsByBusinessRequestDto $requestDto
+     * @return Collection<int, OrganizationDto>
+     */
+    public function getOrganizationsByBusinessTree(OrganizationsByBusinessRequestDto $requestDto): Collection
+    {
+        $business = $this->businessRepository->getBusinessBySlug($requestDto->slug);
+        $businessIds = $this->collectBusinessIdsRecursive($business);
+
+        return $this->organizationRepository->getOrganizationsByBusinessIds(businessIds: $businessIds);
+    }
+
+    /**
+     * @param BusinessDto $business
+     * @return array
+     */
+    private function collectBusinessIdsRecursive(BusinessDto $business): array
+    {
+        $ids = [$business->id];
+
+        $childrenIds = [];
+
+        foreach ($business->children as $child) {
+            $childrenIds[] = $this->collectBusinessIdsRecursive($child);
+        }
+
+        if (!empty($childrenIds)) {
+            $ids = array_merge($ids, ...$childrenIds);
+        }
+
+        return $ids;
     }
 }

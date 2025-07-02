@@ -29,11 +29,20 @@ interface OrganizationReaderInterface
      * @param bool $withBuilding
      * @return Collection<int, OrganizationDto>
      */
-    public function getOrganizationsByGeoArea(OrganizationsByGeoAreaRequestDto $requestDto, bool $withBuilding = false): Collection;
+    public function getOrganizationsByGeoArea(
+        OrganizationsByGeoAreaRequestDto $requestDto,
+        bool $withBuilding = false
+    ): Collection;
 
     /**
      * @param int $id
      * @return OrganizationDto
      */
     public function getOrganizationsById(int $id): OrganizationDto;
+
+    /**
+     * @param OrganizationsByBusinessRequestDto $requestDto
+     * @return Collection<int, OrganizationDto>
+     */
+    public function getOrganizationsByBusinessTree(OrganizationsByBusinessRequestDto $requestDto): Collection;
 }
